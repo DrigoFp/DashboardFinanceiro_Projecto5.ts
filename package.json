@@ -1,0 +1,24 @@
+{
+  "name": "projecto1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrigoFp/DashboardFinanceiro_Projecto5.ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/DrigoFp/DashboardFinanceiro_Projecto5.ts/issues"
+  },
+  "homepage": "https://github.com/DrigoFp/DashboardFinanceiro_Projecto5.ts#readme",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

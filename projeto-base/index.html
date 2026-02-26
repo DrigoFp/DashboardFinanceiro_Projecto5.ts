@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="pastafotos/financas.jpg" type="img/jpg" />
+    <script type="module" src="Modulo App/app.js" defer></script>
+
+    <title>Dashboard Financeiro Pessoal</title>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <p class="logo">Minhas <span class="financas">Finanças</span></p>
+      <menu class="menu">
+        <ul class="lista-de-servicos">
+          <div class="containers-services first">
+            <div class="list-icons"></div>
+            <li class="menu-itens">Dashboard</li>
+          </div>
+          <div class="containers-services">
+            <div class="list-icons"></div>
+            <li class="menu-itens">Relatórios</li>
+          </div>
+          <div class="containers-services">
+            <div class="list-icons"></div>
+            <li class="menu-itens">Transações</li>
+          </div>
+          <div class="containers-services">
+            <div class="list-icons"></div>
+            <li class="menu-itens">Orçamentos</li>
+          </div>
+        </ul>
+      </menu>
+    </aside>
+
+    <header class="header">
+      <button id="toggle-theme" class="toggle-theme">🌙</button>
+      <div class="titulo-container">
+        <h2 class="titulo">Overview</h2>
+        <p class="subtitle">
+          Bem vindo de volta, aqui está o que acontece com o seu dinheiro
+        </p>
+      </div>
+      <div class="header-actions">
+        <div class="calendario"></div>
+        <button class="exportar">Exportar</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="cards">
+        <div class="cards-container">
+          <div class="card">
+            <div class="titulo-card">💰 Balanço Total</div>
+            <div class="valor"></div>
+            <div class="informacao"></div>
+          </div>
+          <div class="card">
+            <div class="titulo-card"> 📈Renda Total</div>
+            <div class="valor"></div>
+            <div class="informacao"></div>
+          </div>
+          <div class="card">
+            <div class="titulo-card">📉 Total de Despesas</div>
+            <div class="valor expense-color"></div>
+            <div class="informacao expense-color"></div>
+          </div>
+        </div>
+      </section>
+      <section class="transacoes">
+        <div class="nova-transacao">
+          <div class="titulo-nova-transacao-container">
+            <p class="titulo-nova-transacao">Nova Transação</p>
+            <div class="nova-transacao-icon">+</div>
+          </div>
+          <div class="form-container">
+            <div class="description-form">
+              <form action="" class="receitas"></form>
+              <label for="descricao">Descrição</label>
+              <input
+                type="text"
+                id="descricao"
+                placeholder="ex. Renda mensal"
+              />
+            </div>
+            <div class="qtd-tipo-transacao-container">
+              <div class="qtd-container">
+                <label for="quantidade">Valor</label>
+                <input type="number" id="quantidade" placeholder="ex. 1000" />
+              </div>
+              <div class="tipo-transacao-container">
+                <label for="tipo-transacao">Tipo</label>
+                <select name="tipo-transacao" id="tipo-transacao">
+                  <option value="receita">Receita</option>
+                  <option value="despesa">Despesa</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="categoria-container">
+            <div class="categorias receita">💶 Salário</div>
+            <div class="categorias receita">🪙 Outros Recebimentos</div>
+            <div class="categorias receita">💰 Poupança</div>
+            <div class="categorias despesa">🥩 Alimentação</div>
+            <div class="categorias despesa">💧 Água</div>
+            <div class="categorias despesa">🏡 Renda</div>
+            <div class="categorias despesa">💡Electricidade</div>
+            <div class="categorias despesa">🪔 Gás</div>
+            <div class="categorias despesa">📞 MEO</div>
+            <div class="categorias despesa">🐕 Cão</div>
+            <div class="categorias despesa">⛽ Combustivel</div>
+            <div class="categorias despesa">💇‍♀️ Cabeleireiro</div>
+            <div class="categorias despesa">🍽️ Restaurantes</div>
+            <div class="categorias despesa">🩺 Saúde</div>
+            <div class="categorias despesa">👖 Roupa</div>
+            <div class="categorias despesa">💳 Créditos</div>
+            <div class="categorias despesa">🏋️ Ginásio</div>
+            <div class="categorias despesa">💸 Outros</div>
+          </div>
+          <button class="adiciona-historia">
+            <div class="btn-container">
+              <div class="btn-icon">+</div>
+              <p class="btn-text">Adicionar ao histórico</p>
+            </div>
+          </button>
+        </div>
+        <article class="historico">
+          <h3 class="sub-titulo-historico">Histórico recente</h3>
+          <div class="table-container">
+            <div class="cabecalho-tabela">
+              <span>TRANSAÇÃO</span>
+              <span>CATEGORIA</span>
+              <span>DATA</span>
+              <span>VALOR</span>
+            </div>
+
+            <div class="lista-transacoes"></div>
+
+            <div class="rodape-tabela">
+              <a href="#" class="link-extrato">VER EXTRATO COMPLETO &rarr;</a>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+    <footer class="footer">
+      <p>© 2026 Minhas Finanças. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>
