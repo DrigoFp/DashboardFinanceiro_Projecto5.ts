@@ -28,12 +28,7 @@ Resultado esperado: 250
 Não escreva loops tradicionais.
 */
 
-interface Transacao {
-  id: string;
-  descricao: string;
-  valor: number;
-  tipo: "receita" | "despesa";
-}
+import Transacao from "../interfaces/Transacao";
 
 function calcularTotalTransacoes(transacoes: Transacao []) {
   return transacoes.reduce(function (acumulador, transacao) {
@@ -70,7 +65,7 @@ function calcularSaldo(transacoes: Transacao []) {
   return saldo;
 }
 
-export function criarTransacao(descricao: string, valor:number, categoria: string, tipo: string) {
+export function criarTransacao(descricao: string, valor:number, categoria: string, tipo: "receita" | "despesa"): Transacao {
     return {
         id: crypto.randomUUID(),
         descricao,

@@ -18,14 +18,16 @@ REFLEXÃO:
 DESAFIO:
 Como aplicar classes diferentes para receita e despesa?
 */
-export function criarEstrutura() {
+export function limparLista() {
     const listaTransacoes = document.querySelector(".lista-transacoes");
+    if (!listaTransacoes)
+        return;
     listaTransacoes.innerHTML = ""; // limpar o container
 }
 // RENDERIZAR LISTA DE TRANSAÇÕES
 export function renderizarTransacoes(transacoes) {
     const listaTransacoes = document.querySelector(".lista-transacoes");
-    listaTransacoes.innerHTML = ""; // limpar antes de renderizar
+    limparLista();
     transacoes.forEach(function (transacao) {
         const caixaTransacao = document.createElement("div");
         caixaTransacao.classList.add("transacao");
@@ -45,6 +47,8 @@ export function renderizarTransacoes(transacoes) {
             </p>
             <button class="btn-remover" data-id="${transacao.id}">🗑️</button>
         `;
+        if (!listaTransacoes)
+            return;
         listaTransacoes.appendChild(caixaTransacao);
     });
 }
@@ -70,7 +74,7 @@ export function renderizarCards(transacoes) {
 // CRIAR TRANSACAO COM DATA
 export function criarTransacao(descricao, valor, categoria, tipo) {
     return {
-        id: Date.now(),
+        id: Date.now().toString(),
         descricao,
         valor,
         categoria,

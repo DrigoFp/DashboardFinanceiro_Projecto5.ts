@@ -23,7 +23,6 @@ Como garantir que o array nunca fique fora de sincronia?
 */
 //-----------------------------------------------------------
 // carregarDados() altera transacoes
-// transacao  = [valor, data, categoria, descriçao, receita, despesa]
 import { lerDados, salvarDados } from "../Modulo Storage/storage.js";
 let transacoes = [];
 // 1) Carregar dados do localStorage ao iniciar

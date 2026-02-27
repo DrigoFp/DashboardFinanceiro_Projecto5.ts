@@ -22,9 +22,11 @@ DICA:
 localStorage só aceita strings.
 */
 
-const chave = "minhas_transacoes"
+import Transacao from "../interfaces/Transacao";
 
-export function salvarDados (dados){
+const chave: string = "minhas_transacoes"
+
+export function salvarDados (dados:Transacao[]){
    const dadosConvertidos = JSON.stringify(dados)
    localStorage.setItem(chave,dadosConvertidos);
 }
