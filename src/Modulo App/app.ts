@@ -171,7 +171,7 @@ const dia = hoje.getDate();
 const mes = meses[hoje.getMonth()];
 const ano = hoje.getFullYear();
 
-if(calendario && calendario.textContent) {
+if(calendario) {
 
 calendario.textContent = `${dia} ${mes} ${ano}`;
 }
