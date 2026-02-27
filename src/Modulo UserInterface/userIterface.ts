@@ -19,18 +19,24 @@ DESAFIO:
 Como aplicar classes diferentes para receita e despesa?
 */
 
+import Transacao from "../interfaces/Transacao.js";
 import { removerTransacao } from "../Modulo State/state.js";
 
-export function criarEstrutura() {
-  const listaTransacoes = document.querySelector(".lista-transacoes");
+export function limparLista() {
+  const listaTransacoes =
+    document.querySelector<HTMLDivElement>(".lista-transacoes");
+
+  if (!listaTransacoes) return;
+
   listaTransacoes.innerHTML = ""; // limpar o container
 }
 
 // RENDERIZAR LISTA DE TRANSAÇÕES
 
-export function renderizarTransacoes(transacoes) {
+export function renderizarTransacoes(transacoes: Transacao[]) {
   const listaTransacoes = document.querySelector(".lista-transacoes");
-  listaTransacoes.innerHTML = ""; // limpar antes de renderizar
+
+  limparLista();
 
   transacoes.forEach(function (transacao) {
     const caixaTransacao = document.createElement("div");
@@ -52,6 +58,7 @@ export function renderizarTransacoes(transacoes) {
             </p>
             <button class="btn-remover" data-id="${transacao.id}">🗑️</button>
         `;
+    if(!listaTransacoes) return;
 
     listaTransacoes.appendChild(caixaTransacao);
   });
@@ -59,7 +66,7 @@ export function renderizarTransacoes(transacoes) {
 
 // RENDERIZAR CARDS (saldo, receitas, despesas)
 
-export function renderizarCards(transacoes) {
+export function renderizarCards(transacoes: Transacao[]) {
   const totalReceitas = transacoes
     .filter((t) => t.valor > 0)
     .reduce((acc, t) => acc + t.valor, 0);
@@ -71,23 +78,23 @@ export function renderizarCards(transacoes) {
   const saldo = totalReceitas + totalDespesas;
 
   // CARD 1 — SALDO TOTAL
-  document.querySelector(".cards .card:nth-child(1) .valor").textContent =
+  document.querySelector(".cards .card:nth-child(1) .valor")!.textContent =
     saldo.toFixed(2) + " €";
 
   // CARD 2 — RECEITAS
-  document.querySelector(".cards .card:nth-child(2) .valor").textContent =
+  document.querySelector(".cards .card:nth-child(2) .valor")!.textContent =
     totalReceitas.toFixed(2) + " €";
 
   // CARD 3 — DESPESAS
-  document.querySelector(".cards .card:nth-child(3) .valor").textContent =
+  document.querySelector(".cards .card:nth-child(3) .valor")!.textContent =
     totalDespesas.toFixed(2) + " €";
 }
 
 // CRIAR TRANSACAO COM DATA
 
-export function criarTransacao(descricao, valor, categoria, tipo) {
+export function criarTransacao(descricao: string, valor: number, categoria:string, tipo:"receita" | "despesa"): Transacao {
   return {
-    id: Date.now(),
+    id: Date.now().toString(),
     descricao,
     valor,
     categoria,

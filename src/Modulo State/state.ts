@@ -26,9 +26,11 @@ Como garantir que o array nunca fique fora de sincronia?
 
 // transacao  = [valor, data, categoria, descriçao, receita, despesa]
 
+import Transacao from "../interfaces/Transacao.js";
+
 import { lerDados, salvarDados } from "../Modulo Storage/storage.js";
 
-let transacoes = [];
+let transacoes: Transacao[] = [];
 
 // 1) Carregar dados do localStorage ao iniciar
 export function carregarDados() {
@@ -41,14 +43,14 @@ export function obterTransacoes() {
 }
 
 // 3) Adicionar nova transação
-export function adicionarTransacao(novaTransacao) {
+export function adicionarTransacao(novaTransacao: Transacao) {
   transacoes.push(novaTransacao);
   salvarDados(transacoes);
   return transacoes;
 }
 
 // 4) Remover transação por id
-export function removerTransacao(id) {
+export function removerTransacao(id:string) {
   transacoes = transacoes.filter(t => t.id !== id);
   salvarDados(transacoes);
   return transacoes;

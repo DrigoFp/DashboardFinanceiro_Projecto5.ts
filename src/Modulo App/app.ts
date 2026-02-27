@@ -21,6 +21,7 @@ Pergunta:
 O que deve acontecer quando a página recarrega?
 */
 
+
 // IMPORTS
 import {
   adicionarTransacao,
@@ -35,12 +36,14 @@ import {
 } from "../Modulo UserInterface/userIterface.js";
 import { criarTransacao } from "../Modulo Transactions/transactions.js";
 
+import Transacao from "../interfaces/Transacao.js";
+
 carregarDados();
 
 document.addEventListener("click", (e) => {
   const target = e.target as HTMLElement | null;
   if (!target) return;
-  if (target.classList.contains("btn-remover")) {
+  if (target.classList.contains("btn-remover")) { 
     const id = target.dataset.id;
 
     // CONFIRMAÇÃO
@@ -50,31 +53,34 @@ document.addEventListener("click", (e) => {
 
     if (!confirmar) return;
 
+     if (id === undefined) return;
+
     removerTransacao(id);
 
     renderizarTransacoes(obterTransacoes());
     renderizarCards(obterTransacoes());
 
-    mostrarToast("Transação removida!");
+    removerTransacao("Transação removida!");
   }
 });
 
 // CAPTURAR ELEMENTOS DO DOM (Passo 1)
-const inputDescricao = document.querySelector("#descricao");
-const inputQuantidade = document.querySelector("#quantidade");
-const inputTipo = document.querySelector("#tipo-transacao");
-const botaoAdicionar = document.querySelector(".adiciona-historia");
-const calendario = document.querySelector(".calendario");
+const inputDescricao = document.querySelector<HTMLInputElement>("#descricao");
+const inputQuantidade = document.querySelector<HTMLInputElement>("#quantidade");
+const inputTipo = document.querySelector<HTMLInputElement>("#tipo-transacao");
+const botaoAdicionar = document.querySelector<HTMLInputElement>(".adiciona-historia");
+const calendario = document.querySelector<HTMLInputElement>(".calendario");
 
 // BOTOES DE ACRESCENTAR ELEMENTOS ÀS DESPESAS/RECEITAS
 
-let categoriaSelecionada = null;
-const botoesCategoria = document.querySelectorAll(".categorias");
-const selectTipo = document.querySelector("#tipo-transacao");
+let categoriaSelecionada: string | null = null;
+const botoesCategoria = document.querySelectorAll<HTMLInputElement>(".categorias");
+const selectTipo = document.querySelector<HTMLInputElement>("#tipo-transacao");
 
 // Função que ativa/desativa categorias conforme o tipo escolhido
 
-function atualizarCategorias() {
+function atualizarCategorias(): void {
+  if (!selectTipo) return; // garante que existe
   const tipoAtual = selectTipo.value; // "receita" ou "despesa"
 
   botoesCategoria.forEach((botao) => {
@@ -94,7 +100,9 @@ function atualizarCategorias() {
 }
 
 // Atualizar categorias quando o tipo muda
+if(selectTipo){
 selectTipo.addEventListener("change", atualizarCategorias);
+}
 
 // Selecionar categoria válida
 botoesCategoria.forEach((botao) => {
@@ -102,6 +110,9 @@ botoesCategoria.forEach((botao) => {
     if (botao.classList.contains("desativada")) return;
 
     botoesCategoria.forEach((b) => b.classList.remove("ativa"));
+
+    if(!botao.textContent)return;
+
     botao.classList.add("ativa");
 
     categoriaSelecionada = botao.textContent.trim();
@@ -119,6 +130,8 @@ botoesCategoria.forEach((botao) => {
       : "despesa";
 
     // verificar compatibilidade
+    if (!selectTipo) return;
+
     if (tipoBotao !== selectTipo.value) {
       alert(`Esta categoria só pode ser usada para ${tipoBotao}.`);
       return;
@@ -131,6 +144,8 @@ botoesCategoria.forEach((botao) => {
     botao.classList.add("ativa");
 
     // guardar categoria
+    if(!botao.textContent) return;
+
     categoriaSelecionada = botao.textContent.trim();
   });
 });
@@ -156,8 +171,10 @@ const dia = hoje.getDate();
 const mes = meses[hoje.getMonth()];
 const ano = hoje.getFullYear();
 
-calendario.textContent = `${dia} ${mes} ${ano}`;
+if(calendario && calendario.textContent) {
 
+calendario.textContent = `${dia} ${mes} ${ano}`;
+}
 // CARREGAR TRANSACOES EXISTENTES
 const transacoesIniciais = obterTransacoes();
 renderizarTransacoes(transacoesIniciais);
@@ -165,9 +182,14 @@ renderizarCards(transacoesIniciais);
 
 // EVENTO DO BOTÃO (Passos 2 a 7)
 
+
+if (botaoAdicionar){
+
 botaoAdicionar.addEventListener("click", function () {
   // PASSO 2: Ler inputs
-
+  if (!inputDescricao) return;
+  if(!inputQuantidade) return;
+  if(!inputTipo) return;
   const descricao = inputDescricao.value.trim();
   const quantidade = Number(inputQuantidade.value);
   const tipo = inputTipo.value;
@@ -184,6 +206,8 @@ botaoAdicionar.addEventListener("click", function () {
     return;
   }
   // PASSO 4: Criar objeto transação
+
+if (tipo === "receita" || tipo === "despesa") {
 
   const novaTransacao = criarTransacao(
     descricao,
@@ -209,13 +233,15 @@ botaoAdicionar.addEventListener("click", function () {
   inputDescricao.value = "";
   inputQuantidade.value = "";
   inputTipo.value = "receita";
-});
-
+}});
+}
 const btnTema = document.querySelector("#toggle-theme");
+
+if(btnTema){
 
 btnTema.addEventListener("click", () => {
   document.body.classList.toggle("light");
 
   // trocar ícone
   btnTema.textContent = document.body.classList.contains("light") ? "🌞" : "🌙";
-});
+})};
